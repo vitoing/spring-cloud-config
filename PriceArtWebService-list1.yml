@@ -5,6 +5,7 @@ application:
 # ==============================================================
 # = Proprietà Fonte Dati PostgreSQL
 # ==============================================================
+spring:
   datasource:
     initialization-mode: always
     password: 123_Stella
