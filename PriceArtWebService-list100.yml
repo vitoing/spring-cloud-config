@@ -1,3 +1,4 @@
 #Application Config
 application:
   listino: 100
+  sconto: 20
