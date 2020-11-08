@@ -1,3 +1,8 @@
+#Application Config
+application:
+  listino: 1
+  sconto: 0
+  
 # ==============================================================
 # = Proprietà Fonte Dati PostgreSQL
 # ==============================================================
