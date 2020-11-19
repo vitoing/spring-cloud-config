@@ -31,18 +31,6 @@ spring:
 
 
 # ==============================================================
-# = Impostazioni Client
-# ============================================================== 
-#eureka:
-#  client:
-#    registerWithEureka: true
-#    fetchRegistry: true
-#    serviceUrl:
-#     defaultZone: ${EUREKA_URL:http://user:BimBumBam_2018@localhost:8761/eureka/}
-#    #time out di connessione in secondi al server Eureka (def 5 sec) 
-#    eureka-server-connect-timeout-seconds: 8
-
-# ==============================================================
 # = Eureka Properties  
 # = Nota: prima di attivare il servizio servono tre heartbeat
 # ==============================================================
@@ -80,25 +68,6 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,bus-refresh
+        include: health,info,metrics,refresh,bus-refresh,hystrix.stream
                 
-    
-# ==============================================================
-# = Proprietà Servizio gestUser
-# ==============================================================           
-gestuser:
-  password: BimBumBam_2018
-  srvUrl: http://localhost:8019/api/utenti/cerca/userid/
-  userId: ReadUser
-  
-# ==============================================================
-# = Parametri Sicurezza JWT 
-# ==============================================================
-sicurezza:
-    uri: /auth
-    refresh: /refresh
-    header: Authorization
-    prefix: Bearer 
-    expiration: 86400
-    secret: 123_Stella
         
