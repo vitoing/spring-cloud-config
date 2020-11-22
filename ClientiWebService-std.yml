@@ -1,14 +1,18 @@
 # ==============================================================
-# = Articoli Web Service - Versione Autenticazione JWT
+# = Clienti Web Service - Profilo std
 # ==============================================================
 
-server:
-  port: 505${seq}
- 
-# ==============================================================
-# = DBMS PostgreSQL Parameters
-# ==============================================================
 spring:
+# ==============================================================
+# = Cloud Parameters
+# ==============================================================
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+# ==============================================================
+# = Proprietà Fonte Dati PostgreSQL
+# ==============================================================
   datasource:
     initialization-mode: always
     password: 123_Stella
@@ -25,7 +29,6 @@ spring:
           lob:
             non_contextual_creation: true
     show-sql: true
-
 # ==============================================================
 # = ZipKin parameters
 # ==============================================================
@@ -42,10 +45,17 @@ spring:
     sampler:
       probability: 1.0
     traceId128: false
-    
+# ==============================================================
+# = Proprietà RabbitMQ
+# ==============================================================      
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq   
 # ==============================================================
 # = Feign Parameters
-# ==============================================================
+# ============================================================== 
 feign:
   compression:
     request:
@@ -59,8 +69,6 @@ feign:
       default:
         connectTimeout: 300000 #5 MINUTI
         readTimeout: 300000
-
-      
 # ==============================================================
 # = Actuator Parameters
 # ==============================================================
@@ -74,7 +82,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,refresh,bus-refresh,hystrix.stream
+        include: health,info,metrics,hystrix.stream
         
 # ==============================================================
 # = Actuator Info
@@ -86,7 +94,8 @@ info:
     telefono: "33412345678"
     orario: "9-20"
   nome:
-    nome-app: "Articoli Web Service - Versione Autenticazione JWT"
+    nome-app: "Clienti Web Service"
+    profilo: "std"
 
 # ==============================================================
 # = Proprietà Logging
@@ -104,10 +113,47 @@ logging:
     
   # Livello del Log generale
   level:
-  # root: WARN
+   root: INFO
   # Livello di log specifico
    org.springframework.security: DEBUG
    org.hibernate: INFO
    org.springframework.web: INFO
    com.xantrix.webapp.controller: INFO
+   org.springframework.cloud: ERROR
     
+# ==============================================================
+# = Proprietà Servizio gestUser
+# ==============================================================          
+gestuser:
+  password: BimBumBam_2018
+  srvUrl: http://localhost:8019/api/utenti/cerca/userid/
+  userId: ReadUser
+  
+# ==============================================================
+# = Parametri Sicurezza JWT 
+# ==============================================================
+sicurezza:
+    uri: /auth
+    refresh: /refresh
+    header: Authorization
+    prefix: Bearer 
+    expiration: 86400
+    secret: 123_Stella
+
+# ==============================================================
+# = Parametri RabbitMQ 
+# ==============================================================
+rabbitmq:
+  queueName: alphashop.order.queue
+  exchangeName: alphashop-exchange
+  routingKey: alphashop.routingkey
+
+# ==============================================================
+# = Parametri Fidelity 
+# ==============================================================  
+fidelity:
+  valminimo: 10
+  valbollino: 5
+  bonusmobile: 2
+
+
